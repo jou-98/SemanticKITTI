@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#PBS -l select=1:ncpus=8:mem=32
+#PBS -l walltime=8:00:00
+#PBS -o /home/z5211173/SemanticKITTI.txt
+#PBS -M z5211173@unsw.edu.au
+#PBS -m ae
+
+cd /srv/scratch/$USER/SemanticKITTI
+
+source /home/z5211173/.venvs/RandLA/bin/activate
+
+module add gcc
+
+wget -q https://s3.eu-central-1.amazonaws.com/avg-kitti/data_odometry_velodyne.zip
+wget -q http://www.semantic-kitti.org/assets/data_odometry_labels.zip
+
+mkdir dataset/ dataset/sequences
+mkdir dataset/sequences/0{0..9} dataset/sequences/10
+
+for dir in dataset/sequences/*
+do 
+    mkdir $dir/velodyne
+    mkdir $dir/labels
+done
+
+# unzip -j data_odometry_velodyne.zip 
+for seq in $(seq 0 9)
+do
+    unzip -j data_odometry_labels.zip dataset/sequences/0$seq/labels/* -d dataset/sequences/0$seq/labels/
+    unzip -j data_odometry_velodyne.zip dataset/sequences/0$seq/velodyne/* -d dataset/sequences/0$seq/velodyne/
+
+done
+unzip -j data_odometry_labels.zip dataset/sequences/10/labels/*.label -d dataset/sequences/10/labels/
+unzip -j data_odometry_velodyne.zip dataset/sequences/10/velodyne/*.bin -d dataset/sequences/10/velodyne/
+
+
+rm *.zip
+
+sh check_valid.sh
+
+du -sh dataset
