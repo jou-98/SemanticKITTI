@@ -1,6 +1,7 @@
 import numpy as np
 import open3d as o3d
 import sys
+import os
 import util as utils
 
 SEQ = sys.argv[1]
@@ -25,7 +26,7 @@ classes,counts=np.unique(label,return_counts=True)
 # Remove file and return if target classes are not found
 if not set(target) & set(classes):
     print(f'Deleting file {NUM} from sequence {SEQ} due to no points')
-    # os.remove(label_path)
+    os.remove(label_path)
     sys.exit()
 """
 else:
