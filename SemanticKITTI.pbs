@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #PBS -l select=1:ncpus=8:mem=32gb
-#PBS -l walltime=4:00:00
+#PBS -l walltime=12:00:00
 #PBS -o /home/z5211173/SemanticKITTI.txt
 #PBS -M z5211173@unsw.edu.au
 #PBS -m ae
@@ -13,7 +13,7 @@ source /home/z5211173/.venvs/RandLA/bin/activate
 module add gcc
 
 #wget -q https://s3.eu-central-1.amazonaws.com/avg-kitti/data_odometry_velodyne.zip
-wget -q http://www.semantic-kitti.org/assets/data_odometry_labels.zip
+#wget -q http://www.semantic-kitti.org/assets/data_odometry_labels.zip
 
 mkdir dataset/ dataset/sequences
 mkdir dataset/sequences/0{0..9} dataset/sequences/10
