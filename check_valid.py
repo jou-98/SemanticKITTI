@@ -7,11 +7,13 @@ import util as utils
 SEQ = sys.argv[1]
 NUM = sys.argv[2]
 
-
+BIN_DIR = './dataset/sequences/'+SEQ+'/velodyne/'+NUM+'.bin'
 LABEL_DIR = './dataset/sequences/'+SEQ+'/labels/'+NUM+'.label'
 
 label_path = LABEL_DIR # + num + '.label'
+bin_path = BIN_DIR
 label = utils.read_label(label_path)
+
 #print(f'Preprocessing file {NUM} from sequence {SEQ}')
 
 background = list(range(50,75))
@@ -27,7 +29,7 @@ classes,counts=np.unique(label,return_counts=True)
 if not set(target) & set(classes):
     print(f'Deleting file {NUM} from sequence {SEQ} due to no points')
     os.remove(label_path)
-    sys.exit()
+    os.remove(bin_path)
 """
 else:
     sum=0
