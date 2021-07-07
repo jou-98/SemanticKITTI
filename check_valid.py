@@ -27,9 +27,11 @@ target = [11,15,30,31,32,80,81]
 classes,counts=np.unique(label,return_counts=True)
 # Remove file and return if target classes are not found
 if not set(target) & set(classes):
-    print(f'Deleting file {NUM} from sequence {SEQ} due to no points')
+    #print(f'Deleting file {NUM} from sequence {SEQ} due to no points')
     os.remove(label_path)
     os.remove(bin_path)
+else:
+    print(f'Keeping SEQ {SEQ} NUM {NUM}')
 """
 else:
     sum=0

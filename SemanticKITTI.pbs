@@ -13,7 +13,7 @@ source /home/z5211173/.venvs/RandLA/bin/activate
 module add gcc
 
 #wget -q https://s3.eu-central-1.amazonaws.com/avg-kitti/data_odometry_velodyne.zip
-#wget -q http://www.semantic-kitti.org/assets/data_odometry_labels.zip
+wget -q http://www.semantic-kitti.org/assets/data_odometry_labels.zip
 
 mkdir dataset/ dataset/sequences
 mkdir dataset/sequences/0{0..9} dataset/sequences/10
@@ -35,7 +35,7 @@ unzip -j data_odometry_labels.zip dataset/sequences/10/labels/*.label -d dataset
 unzip -j data_odometry_velodyne.zip dataset/sequences/10/velodyne/*.bin -d dataset/sequences/10/velodyne/
 
 
-rm *.zip
+#rm *.zip
 
 sh check_valid.sh
 
