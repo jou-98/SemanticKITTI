@@ -27,12 +27,12 @@ done
 for seq in $(seq 0 9)
 do
     unzip -j data_odometry_labels.zip dataset/sequences/0$seq/labels/* -d dataset/sequences/0$seq/labels/
-    unzip -j data_odometry_velodyne.zip dataset/sequences/0$seq/velodyne/* -d dataset/sequences/0$seq/velodyne/
+    #unzip -j data_odometry_velodyne.zip dataset/sequences/0$seq/velodyne/* -d dataset/sequences/0$seq/velodyne/
 
 done
 
 unzip -j data_odometry_labels.zip dataset/sequences/10/labels/*.label -d dataset/sequences/10/labels/
-unzip -j data_odometry_velodyne.zip dataset/sequences/10/velodyne/*.bin -d dataset/sequences/10/velodyne/
+#unzip -j data_odometry_velodyne.zip dataset/sequences/10/velodyne/*.bin -d dataset/sequences/10/velodyne/
 
 
 #rm *.zip
