@@ -12,23 +12,19 @@ CLASSES = {0:"unlabeled", 1 : "outlier", 11: "bicycle", 15: "motorcycle",\
 
 def render_color(pc,label,ply_path='./00_001000_colored.ply'):
     labels = np.unique(label)
-    print(np.unique(label,return_counts=True))
     colors = dict()
     for i in labels:
         color = list(np.random.choice(range(100), size=3)/100)
         colors[i] = color
-    #print(colors)
     rgb = np.zeros((pc.shape[0],3))
+
     for i in labels:
-        label_pos = np.where(label==i)
+        label_pos = np.argwhere(np.any(label==i, axis=1))#label[label==i]
         if not i in CLASSES:
             continue
         rgb[label_pos] = colors[i]
-        print(f'Colour of class {CLASSES[i]} is \
-        [{colors[i][0]*255},{colors[i][1]*255},{colors[i][2]*255}]')
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(pc)
-    # print(rgb.shape())
     pcd.colors = o3d.utility.Vector3dVector(rgb)
     o3d.io.write_point_cloud(ply_path, pcd) 
     

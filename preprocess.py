@@ -1,7 +1,8 @@
 import numpy as np
 import open3d as o3d
 import sys
-
+from util import read_pc, read_label,render_color
+import util
 SEQ = sys.argv[1]
 NUM = sys.argv[2]
 
@@ -14,7 +15,7 @@ def labelFromFile(fname):
     labels = labels.reshape((-1,2))
     unique, counts = np.unique(labels[:,0], return_counts=True)
     dic = dict(zip(unique, counts))
-    return labels
+    return labels[:,0]
 
 
 def pointsFromFile(fname):
@@ -23,15 +24,10 @@ def pointsFromFile(fname):
     return scan[:,:3]
 
 bin_path = BIN_DIR # + num + '.bin'
-pts = pointsFromFile(bin_path)
+pts = read_pc(bin_path,dim=4)
 label_path = LABEL_DIR # + num + '.label'
-label = labelFromFile(label_path)
+label = read_label(label_path,dim=2)
 
-"""
-pcd1 = o3d.geometry.PointCloud()
-pcd1.points = o3d.utility.Vector3dVector(pts)
-o3d.io.write_point_cloud(NUM+"normal.ply", pcd1)
-"""
 background = list(range(50,75))
 blacklist = [10,13,16,18,20,\
             *background,\
@@ -42,7 +38,7 @@ blacklist = [10,13,16,18,20,\
 
 
 
-others = np.isin(label[:,0],blacklist)
+others = np.isin(label,blacklist)
 #print(others.shape)
 pts = np.delete(pts,others,axis=0)
 #print(pts.shape)
@@ -56,6 +52,10 @@ new_labels = new_labels.reshape((-1,1))
 rgb = np.concatenate((new_labels,new_labels,new_labels),axis=1)
 
 pts.tofile(BIN_DIR)
+
+
+#render_color(pts,new_labels,SEQ+'_'+NUM+'.ply')
+
 """
 pcd2 = o3d.geometry.PointCloud()
 pcd2.points = o3d.utility.Vector3dVector(pts)
@@ -63,5 +63,5 @@ pcd2.points = o3d.utility.Vector3dVector(pts)
 pcd2.colors = o3d.utility.Vector3dVector(rgb)
 
 o3d.io.write_point_cloud(NUM+".ply", pcd2)
-
 """
+

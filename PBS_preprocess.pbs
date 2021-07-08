@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#PBS -l select=1:ncpus=8:mem=32gb
+#PBS -l walltime=12:00:00
+#PBS -o /home/z5211173/SemanticKITTI.txt
+#PBS -M z5211173@unsw.edu.au
+#PBS -m ae
+
+
+cd /srv/scratch/$USER/SemanticKITTI
+
+source /home/z5211173/.venvs/RandLA/bin/activate
+
+module add gcc
+
+sh preprocess.sh 00
+
+sh preprocess.sh 01
