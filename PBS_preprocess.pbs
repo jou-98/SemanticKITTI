@@ -7,19 +7,19 @@
 #PBS -m ae
 
 
-cd /srv/scratch/$USER/
+cd /srv/scratch/$USER/SemanticKITTI
 
 source /home/z5211173/.venvs/RandLA/bin/activate
 
 module add gcc
 
-sh preprocess.sh 00
+#sh preprocess.sh 00
 
-sh preprocess.sh 01
+#sh preprocess.sh 01
 
-sh preprocess.sh 02
+#sh preprocess.sh 02
 
-sh preprocess.sh 03
+#sh preprocess.sh 03
 
 #sh preprocess.sh 04
 
@@ -29,8 +29,8 @@ sh preprocess.sh 03
 
 #sh preprocess.sh 07
 
-#sh preprocess.sh 08
+sh preprocess.sh 08
 
-#sh preprocess.sh 09
+sh preprocess.sh 09
 
-#sh preprocess.sh 10
+sh preprocess.sh 10

@@ -9,7 +9,7 @@ do
     then 
         num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
         #echo "seq is $seq and num is $num"
-        unzip -j /srv/scratch/z5211173/data_odometry_velodyne.zip dataset/sequences/$seq/velodyne/$num.bin -d dataset/sequences/$seq/velodyne/
+        unzip -j /srv/scratch/z5211173/SemanticKITTI/data_odometry_velodyne.zip dataset/sequences/$seq/velodyne/$num.bin -d dataset/sequences/$seq/velodyne/
         python3 preprocess.py $seq $num
     fi
 done < binList.txt
