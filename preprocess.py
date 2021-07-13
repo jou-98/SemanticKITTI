@@ -38,7 +38,7 @@ blacklist = [10,13,16,18,20,\
 
 
 
-others = np.isin(label,blacklist,inverse=True)
+others = np.isin(label,blacklist,invert=True)
 #print(others.shape)
 pts = pts[others]
 #print(pts.shape)

@@ -13,13 +13,41 @@ source /home/z5211173/.venvs/RandLA/bin/activate
 
 module add gcc
 
-sh preprocess.sh 00
+for line in dataset/sequences/00/velodyne/*
+do 
+    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
+    num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
+    python3 preprocess.py $seq $num
+done 
 
-sh preprocess.sh 01
+for line in dataset/sequences/01/velodyne/*
+do 
+    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
+    num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
+    python3 preprocess.py $seq $num
+done 
 
-sh preprocess.sh 02
+for line in dataset/sequences/02/velodyne/*
+do 
+    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
+    num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
+    python3 preprocess.py $seq $num
+done 
 
-sh preprocess.sh 03
+for line in dataset/sequences/03/velodyne/*
+do 
+    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
+    num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
+    python3 preprocess.py $seq $num
+done 
+
+#sh preprocess.sh 00
+
+#sh preprocess.sh 01
+
+#sh preprocess.sh 02
+
+#sh preprocess.sh 03
 
 sh preprocess.sh 04
 
@@ -29,8 +57,8 @@ sh preprocess.sh 06
 
 sh preprocess.sh 07
 
-#sh preprocess.sh 08
+sh preprocess.sh 08
 
-#sh preprocess.sh 09
+sh preprocess.sh 09
 
-#sh preprocess.sh 10
+sh preprocess.sh 10
