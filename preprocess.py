@@ -38,12 +38,12 @@ blacklist = [10,13,16,18,20,\
 
 
 
-others = np.isin(label,blacklist)
+others = np.isin(label,blacklist,inverse=True)
 #print(others.shape)
-pts = np.delete(pts,others,axis=0)
+pts = pts[others]
 #print(pts.shape)
 
-new_labels = np.delete(label,others,axis=0)
+new_labels = label[others]
 # new_labels = new_labels[:,0] # Takes the category number but not the instance number
 
 
