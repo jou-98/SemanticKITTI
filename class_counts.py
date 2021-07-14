@@ -1,11 +1,11 @@
 import numpy as np 
 import glob 
 
-counts = {0:"unlabeled", 1 : "outlier", 11: "bicycle", 15: "motorcycle",\
+counts = {0: 0, 1: 0, 11: 0, 15: 0,\
         30: 0, 31: 0, 32: 0, 40: 0,\
         44: 0, 48: 0, 49: 0, 80: 0, 81: 0}
 
-for i in range(11):
+for i in range(10):
     arg = 'dataset/sequences/'+str(i).zfill(2)+'/labels/*.label'
     files = glob.glob(arg)
     
