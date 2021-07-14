@@ -39,6 +39,7 @@ blacklist = [10,13,16,18,20,\
 
 
 others = np.isin(label,blacklist,invert=True)
+print(f'{np.unique(others,return_counts=True)}')
 #print(others.shape)
 pts = pts[others]
 #print(pts.shape)
