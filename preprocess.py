@@ -50,6 +50,8 @@ new_labels = label[others]
 
 
 new_labels.tofile(LABEL_DIR)
+test = np.fromfile(LABEL_DIR,dtype=np.uint16)
+print(np.unique(test))
 new_labels = new_labels.reshape((-1,1))
 rgb = np.concatenate((new_labels,new_labels,new_labels),axis=1)
 
