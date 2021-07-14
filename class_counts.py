@@ -14,9 +14,9 @@ for i in range(10):
         classes, counts = np.unique(arr,return_counts=True)
         for j in range(len(classes)):
             if not classes[j] in count_dict:
-                continue
+                count_dict[classes[j]] = 0
             count_dict[classes[j]] += counts[j]
-            print(f'Class {classes[j]} occurrence: {counts[j]} times')
+            #print(f'Class {classes[j]} occurrence: {counts[j]} times')
 print(count_dict)
 
 
