@@ -38,7 +38,7 @@ print(blacklist)
 # Previous: Keeping 30 as the positive class, and 0, 1, 40-49 as negative class
 
 
-
+print(np.unique(label))
 others = np.isin(label,blacklist,invert=True)
 print(f'{np.unique(others,return_counts=True)}')
 #print(others.shape)
