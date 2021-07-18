@@ -13,3 +13,15 @@ do
         python3 preprocess.py $seq $num
     fi
 done < binList.txt
+
+
+for line in dataset/sequences/*/labels/*.label
+do
+    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
+    num=$(echo $line | grep -o '[0-9]*\.label' | cut -d'.' -f1)
+    if [ ! -f "dataset/sequences/$seq/velodyne/$num.bin" ] 
+    then 
+        #echo "$line" >> hello.txt
+        rm $line
+    fi
+done 
