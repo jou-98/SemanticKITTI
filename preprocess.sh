@@ -9,19 +9,8 @@ do
     then 
         num=$(echo $line | grep -o '[0-9]*\.bin' | cut -d'.' -f1)
         #echo "seq is $seq and num is $num"
-        unzip -j /srv/scratch/z5211173/SemanticKITTI/data_odometry_velodyne.zip dataset/sequences/$seq/velodyne/$num.bin -d dataset/sequences/$seq/velodyne/
+        unzip -q -j /content/SemanticKITTI/data_odometry_velodyne.zip dataset/sequences/$seq/velodyne/$num.bin -d dataset/sequences/$seq/velodyne/
+        unzip -q -j /content/SemanticKITTI/data_odometry_labels.zip dataset/sequences/$seq/labels/$num.label -d dataset/sequences/$seq/labels/
         python3 preprocess.py $seq $num
     fi
 done < binList.txt
-
-
-for line in dataset/sequences/*/labels/*.label
-do
-    seq=$(echo $line | grep -o '/[0-9]*/' | cut -d'/' -f2)
-    num=$(echo $line | grep -o '[0-9]*\.label' | cut -d'.' -f1)
-    if [ ! -f "dataset/sequences/$seq/velodyne/$num.bin" ] 
-    then 
-        #echo "$line" >> hello.txt
-        rm $line
-    fi
-done 
