@@ -63,7 +63,7 @@ def get_pc_and_label(use_seq_frame=True,seq='00',frame='000143',\
     labels = labels.reshape((-1,1))
     ret = np.concatenate((pts,labels),axis=1)
     return ret 
-
+"""
 # Renders a point cloud in black and white, reads either bin file or ply file 
 def render_binary(use_ply=False,bin_path='./bin/00_000143.bin',ply_path=None,\
     label_path='./labels/00_000143.label',render_path='./binary_test.ply'):
@@ -83,7 +83,7 @@ def render_binary(use_ply=False,bin_path='./bin/00_000143.bin',ply_path=None,\
     pcd.points = o3d.utility.Vector3dVector(pc)
     pcd.colors = o3d.utility.Vector3dVector(rgb)
     o3d.io.write_point_cloud(render_path, pcd) 
-
+"""
 # Needs to read bin files from the original dataset to get intensity value
 def read_pc_orig(path='./bin/00_000143.bin', save_ply=True, ply_path='./test.ply',\
     rgb=False):

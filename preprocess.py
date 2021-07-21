@@ -15,44 +15,23 @@ pts = read_pc(bin_path,dim=4)
 label_path = LABEL_DIR # + num + '.label'
 label = read_label(label_path,dim=2)
 
-background = list(range(50,75))
-blacklist = [10,13,16,18,20,\
-            *background,\
-            252,253,254,255,256,257,258,259]
-#print(blacklist)
 # Keep the classes person, bicycle, motorcycle, bicyclist, motorcyclist, pole, traffic sign
 # Use unlabeled, outlier, road, parking, sidewalk, other-ground as background
-# Previous: Keeping 30 as the positive class, and 0, 1, 40-49 as negative class
+whitelist = [0,1,11,15,30,31,32,40,44,48,49,80,81,99]
+target = [11,15,30,31,32,80,81]
 
-
-#print(np.unique(label))
-others = np.isin(label,blacklist,invert=True)
-#print(f'{np.unique(others,return_counts=True)}')
-#print(others.shape)
-pts = pts[others]
-#print(pts.shape)
-
-new_labels = label[others]
-# new_labels = new_labels[:,0] # Takes the category number but not the instance number
-
-
-new_labels.tofile(LABEL_DIR)
-test = np.fromfile(LABEL_DIR,dtype=np.uint16)
-#print(np.unique(test,return_counts=True))
-new_labels = new_labels.reshape((-1,1))
-rgb = np.concatenate((new_labels,new_labels,new_labels),axis=1)
-
+# If there are no target points found in the point cloud, discard it
+target_points = np.isin(label,target)
+if np.unique(target_points).shape[0] == 1:
+    os.remove(bin_path)
+    os.remove(label_path)
+    sys.exit()
+"""
+# Get the valid points
+valid = np.isin(label,whitelist,invert=False)
+# Keep only the valid points and save the files
+pts = pts[valid]
+new_labels = label[valid]
 pts.tofile(BIN_DIR)
-
-
-#render_color(pts,new_labels,SEQ+'_'+NUM+'.ply')
-
+new_labels.tofile(LABEL_DIR)
 """
-pcd2 = o3d.geometry.PointCloud()
-pcd2.points = o3d.utility.Vector3dVector(pts)
-
-pcd2.colors = o3d.utility.Vector3dVector(rgb)
-
-o3d.io.write_point_cloud(NUM+".ply", pcd2)
-"""
-
